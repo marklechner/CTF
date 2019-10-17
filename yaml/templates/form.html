@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+  <h1>Gavin's config deployer</h1>
+  <br/>
+  <form action="{{ url_for('my_form') }}" method="post">
+    <textarea id="config" name="config"
+    rows="18" cols="48">
+---
+name: standard failover
+target: server_hot
+secret: <get it from secret_flag.txt>
+action:
+  - failover:
+      target: server_cold
+  - stop:
+      - application
+      - etl
+      - monitoring
+  - verify
+      all
+notify:
+  - beep:
+      - cell_gavin
+      - oncall
+...
+  </textarea>
+  <br/>
+  <input type="submit" />
+</form>
+<div>
+    <h2>Response</h2>
+    {{ data }}
+</div>
+</body>
+</html>
