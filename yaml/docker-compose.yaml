@@ -1,0 +1,5 @@
+web:
+  build: .
+  ports:
+    - "5300:5300"
+  restart: always
